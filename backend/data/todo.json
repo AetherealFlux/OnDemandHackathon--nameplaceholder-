@@ -1,0 +1,63 @@
+[
+    {
+        "model": "api.Todo",
+        "pk": 1,
+        "fields": {
+            "title": "Complete Project Report",
+            "description": "Finish the final report for the XYZ project and submit it to the manager.",
+            "date": "2023-11-01",
+            "deadline": "2023-11-05T17:00:00Z",
+            "priority": 1,
+            "estimatedDuration": 14400,
+            "duration": 14400,
+            "completed": false,
+            "feedback": "Ensure all sections are thoroughly reviewed."
+        }
+    },
+    {
+        "model": "api.Todo",
+        "pk": 2,
+        "fields": {
+            "title": "Grocery Shopping",
+            "description": "Buy groceries for the week.",
+            "date": "2023-11-02",
+            "deadline": "2023-11-02T20:00:00Z",
+            "priority": 3,
+            "estimatedDuration": 3600,
+            "duration": 4200,
+            "completed": true,
+            "feedback": "Remember to check for discounts."
+        }
+    },
+    {
+        "model": "api.Todo",
+        "pk": 3,
+        "fields": {
+            "title": "Client Meeting",
+            "description": "Discuss the new project scope with the client.",
+            "date": "2023-11-03",
+            "deadline": "2023-11-03T14:00:00Z",
+            "priority": 2,
+            "estimatedDuration": 5400,
+            "duration": 5400,
+            "completed": true,
+            "feedback": "Client was satisfied with the proposal."
+        }
+    },
+    {
+        "model": "api.Todo",
+        "pk": 4,
+        "fields": {
+            "id": 4,
+            "title": "Exercise Routine",
+            "description": "Complete a 30-minute workout session.",
+            "date": "2023-11-04",
+            "deadline": "2023-11-04T08:00:00Z",
+            "priority": 4,
+            "estimatedDuration": 1800,
+            "duration": 1800,
+            "completed": false,
+            "feedback": "Try to push for an extra set."
+        }
+    }
+]

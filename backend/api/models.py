@@ -5,11 +5,8 @@ class Todo(models.Model):
     title = models.CharField(max_length=128, blank=False)
     description = models.TextField(blank=True)
     date = models.DateField()
-    deadline = models.DateTimeField(null=True)
-    priority = models.IntegerField(null=True)
     estimatedDuration = models.IntegerField(null=True)
     duration = models.IntegerField(null=True)
-    tags = models.ManyToManyField(to="Tag")
     completed = models.BooleanField(default=False)
     feedback = models.TextField(null=True)
 
@@ -25,11 +22,6 @@ class Habit(models.Model):
     name = models.CharField(max_length=128, blank=False)
     description = models.TextField(blank=True)
     plan = models.TextField(blank=True)
-    tags = models.ManyToManyField(to="Tag")
-
-class Tag(models.Model):
-    name = models.CharField(max_length=128, blank=False)
-    description = models.TextField(blank=True)
 
 class Schedule(models.Model):
     content = models.TextField(blank=False)

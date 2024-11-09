@@ -27,6 +27,8 @@ The project is a Todo app, with Habit cultivation.
     - The AI can set the category, estimated time of finishing and priority of a task.
   - Scheduling
     - The AI can give a schedule of these tasks based on estimated time and other requirements.
+  - Rearrange
+    - The AI will suggest a rearrangement due to unexpected events such as bad weather.
   - Assessment
     - A summary/feedback can be generated daily.
 

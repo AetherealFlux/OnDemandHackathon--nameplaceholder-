@@ -32,7 +32,7 @@ class BaseView():
     
     def deleteView(self, request: HttpRequest) -> HttpResponse:
         if request.GET.get("id"):
-            self.objects.delete(pk=int(request.GET["id"]))
+            self.model.objects.delete(pk=int(request.GET["id"]))
         else:
             return HttpResponseBadRequest()
         return HttpResponse()

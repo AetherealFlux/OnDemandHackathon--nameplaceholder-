@@ -3,40 +3,46 @@ from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest, Http
 from django.db.models import Model
 from django import forms
 
-class BaseView():
-    def __init__(self, model: Model) -> None:
-        self.model = model
-        class Form(forms.ModelForm):
-            class Meta:
-                model = self.model
-                fields = "__all__"
-        self.Form = Form
-    
-    def addView(self, request: HttpRequest) -> HttpResponse:
-        form = self.Form(request.GET)
-        if form.is_valid():
-            data = form.cleaned_data
-            self.model.objects.create(**data)
-        else:
-            return HttpResponseBadRequest()
-        return HttpResponse()
-    
-    def editView(self, request: HttpRequest) -> HttpResponse:
-        form = self.Form(request.GET)
-        if form.is_valid() and request.GET.get("id"):
-            data = form.cleaned_data
-            self.model.objects.update(pk=int(request.GET["id"]), **data)
-        else:
-            return HttpResponseBadRequest()
-        return HttpResponse()
-    
-    def deleteView(self, request: HttpRequest) -> HttpResponse:
-        if request.GET.get("id"):
-            self.objects.delete(pk=int(request.GET["id"]))
-        else:
-            return HttpResponseBadRequest()
-        return HttpResponse()
+def addTodo(request: HttpRequest) -> HttpResponse:
+    class Form(forms.ModelForm):
+        class Meta:
+            model = models.Todo
+            fields = "__all__"
+    form = Form(request.GET)
+    if form.is_valid():
+        data = form.cleaned_data
+        models.Todo.objects.create(**data)
+    else:
+        return HttpResponseBadRequest()
+    return HttpResponse()
 
-TodoView = BaseView(models.Todo)
-HabitView = BaseView(models.Habit)
-TagView = BaseView(models.Tag)
+def addHabit(request: HttpRequest) -> HttpResponse:
+    class Form(forms.ModelForm):
+        class Meta:
+            model = models.Habit
+            fields = "__all__"
+    form = Form(request.GET)
+    if form.is_valid():
+        data = form.cleaned_data
+        models.Habit.objects.create(**data)
+    else:
+        return HttpResponseBadRequest()
+    return HttpResponse()
+
+def getTodos(request: HttpRequest) -> HttpResponse:
+    return JsonResponse({"todos": models.Todo.objects.all().values_list()})
+
+def getHabits(request: HttpRequest) -> HttpResponse:
+    return JsonResponse({"Habits": models.Habit.objects.all().values_list()})
+
+def genSubtodos(request: HttpRequest) -> HttpResponse:
+    ...
+
+def genHabitTodo(request: HttpRequest) -> HttpResponse:
+    ...
+
+def genSchedule(request: HttpRequest) -> HttpResponse:
+    ...
+
+def genSummary(request: HttpRequest) -> HttpResponse:
+    ...

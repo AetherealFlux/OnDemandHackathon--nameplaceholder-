@@ -30,7 +30,7 @@ def addHabit(request: HttpRequest) -> HttpResponse:
     return HttpResponse()
 
 def getTodos(request: HttpRequest) -> HttpResponse:
-    return JsonResponse({"todos": models.Todo.objects.all().values_list()})
+    return JsonResponse({"todos": list(models.Todo.objects.values())})
 
 def getHabits(request: HttpRequest) -> HttpResponse:
     return JsonResponse({"Habits": models.Habit.objects.all().values_list()})

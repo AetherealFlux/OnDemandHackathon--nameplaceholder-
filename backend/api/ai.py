@@ -29,7 +29,7 @@ class OnDemand():
     def genHabitPlan(self, habit: str) -> str:
         session_id = self.__create_chat_session()
         url = "https://api.on-demand.io/chat/v1/sessions/%s/query" % session_id
-        query = "Give me a plan to cultivate a habit with bullet points clearly labeled. The habit is %s. Make your anser in string format. Exclude instant setups."%(habit)
+        query = "Give me a tutorial to cultivate a habit with bullet points(no more than 4 points) clearly labeled. The habit is %s. Make your professional and brief. Exclude setups and feedback. Don't give JSON."%(habit)
         self.payload["query"] = query
         response = requests.post(url, json=self.payload, headers=self.headers)
         return response.json()["data"]["answer"]
@@ -50,7 +50,8 @@ class OnDemand():
         self.payload["query"] = query
         self.payload["pluginIds"] = ["plugin-1731195963","plugin-1713924030"]
         response = requests.post(url, json=self.payload, headers=self.headers)
-        return response.json()["data"]["answer"][7:-3]
+        answer = response.json()["data"]["answer"].split("```json")[-1].split("```")[0]
+        return answer
     
     def genSummary(self,data:str) -> str: #data:json string {"task":{...}} or {"schedule":{...}}
         session_id = self.__create_chat_session()

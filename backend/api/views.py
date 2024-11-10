@@ -67,14 +67,23 @@ def genHabitTodo(request: HttpRequest) -> HttpResponse:
         return HttpResponseBadRequest()
 
 def genSchedule(request: HttpRequest) -> HttpResponse:
+    todos = getTodoList()
     habits = models.Habit.objects.values()
     for habit in habits:
         habittodos = json.loads(ai.Gen.genHabitTodo(habit=habit["name"], plan=habit["plan"]))
         for todo in habittodos["content"]:
-            models.Todo.objects.create(title=todo["task"], estimatedDuration=todo["estimatedDuration"])
-    todos = getTodoList()
+            if(todo.get("task")):
+                title = todo["task"]
+            elif(todo.get("content")):
+                title = todo["content"]
+            elif(todo.get("title")):
+                title = todo["title"]
+            else:
+                continue
+            todos.append({"title":title, "estimatedDuration":todo["estimatedDuration"]})
     schedule = ai.Gen.genSchedule(data=str({"tasks": str(todos)}))
     models.Schedule.objects.create(content=schedule)
+    print(schedule)
     return JsonResponse({"data": schedule})
 
 def genSummary(request: HttpRequest) -> HttpResponse:

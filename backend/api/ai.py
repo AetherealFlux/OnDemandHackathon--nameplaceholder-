@@ -31,7 +31,7 @@ class OnDemand():
         url = "https://api.on-demand.io/chat/v1/sessions/%s/query" % session_id
         query = "Give me a todo list of habit cultivation plan for today. The habit is %s and the plan is %s."%(habit,plan)
         self.payload["query"] = query
-        self.payload["pluginIds"] = ["plugin-1731196272"]
+        self.payload["pluginIds"] = ["plugin-1731202033"]
         response = requests.post(url, json=self.payload, headers=self.headers)
         return response.json()["data"]["answer"][7:-3]
     

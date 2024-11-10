@@ -6,7 +6,7 @@ payload = { "externalUserId": "1"}
 headers = {
     "accept": "application/json",
     "content-type": "application/json",
-    "apikey": "rdTbeG8dvFQcgtYL8r4SRowGVClreNFr"
+    "apikey": "WQXfBI84GSMLt8fXMgvz16wLE5TjPBoN"
 }
 
 response = requests.post(url, json=payload, headers=headers)
@@ -20,14 +20,14 @@ url = "https://api.on-demand.io/chat/v1/sessions/%s/query" % session_id
 payload = {
     "responseMode": "sync",
     "endpointId": "predefined-openai-gpt4o",
-    "query": "What's the air quality in Oxford, UK today?",
-    "pluginIds": ["plugin-1726246679"]
+    "query": "Give me a todo list of habit cultivation plan for today. The habit is reading book and the plan is read two hours everyday",
+    "pluginIds": ["plugin-1731202033"]
 }
 
 headers = {
     "accept": "application/json",
     "content-type": "application/json",
-    "apikey": "rdTbeG8dvFQcgtYL8r4SRowGVClreNFr"
+    "apikey": "WQXfBI84GSMLt8fXMgvz16wLE5TjPBoN"
 }
 
 response = requests.post(url, json=payload, headers=headers)

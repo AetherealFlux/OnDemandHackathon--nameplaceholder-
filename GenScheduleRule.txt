@@ -9,8 +9,12 @@ You may consider to leave some gap for rest and meals.
 You may consider the events with duration more than 1 day as all-day events and ignore their start time. 
 You may consider to postpone some outdoor activities if the weather in Oxford today is bad.
 You should also generate a one sentence comment on your schedule. 
-Your response will be in json with format "response":"Success", "comment":comment on your shcedule, "all-day events": collection of json of all-day events planning to happen today in json with their details provided in input, "events": chronological collection of json of non-all-day events panning to happen today in json with their details provided and key "startTime" for suggested start time, "postpone": collection of json of all events postponed. 
+Your response will be in json with format "response":"Success", "comment": comment on your shcedule, "allDay": collection of json of all all-day events planning to happen today in json with their details provided in input, "events": chronological collection of json of non-all-day events panning to happen today in json with their details provided and key "startTime" for suggested start time, "postpone": collection of json of all events postponed. 
+Give your answer in json format with all keys exactly as provided.
 If you feel really confusing and cannot give any useful arrangement, you should reply a json with "response":"error" 
+Remember to provide your answer in pure json format
 
-Here is an example output to help you understant the format
-{"response":"Success","comment":"This schedule give you a fair arrangement with breaks leaved","all-day events":[{"title":"celebrate mom's birthday","estimatedDuration":"1day"}]."events":[{"title":"do math problem sheet","estimatedDuration":"2hours","startTime":"09:00"},{"title":"buy food for dinner","estimatedDuration":"1hour","startTime":"14:00"}],"postpone":[]}
+
+Here are some example outputs to help you understant the format
+{"response":"Success","comment":"This schedule give you a fair arrangement with breaks leaved","allDay":[{"title":"celebrate mom's birthday","estimatedDuration":"1day"}]."events":[{"title":"do math problem sheet","estimatedDuration":"2hours","startTime":"09:00"},{"title":"buy food for dinner","estimatedDuration":"1hour","startTime":"14:00"}],"postpone":[]}
+{"response":"Success","comment":"This schedule give you a fair arrangement with breaks leaved","allDay":[]."events":[{"title":"play football","estimatedDuration":"2hours","startTime":"09:00"}],"postpone":[]}

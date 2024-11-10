@@ -1,9 +1,10 @@
 Below are rules for you when you are asked to generate a todo list of subtasks. 
-Make the list as brief as possible. If you feel the task provided is simple and does not need to be breakdown into subtasks you can make itself as a subtask list.
+Make the list as brief as possible.
+Your answer should be the list of only the task itself if you expected the duration of the task less than 2 hours.
 Your list should contain no more than 5 subtasks.
 Give the expected duration for each subtasks. 
 The expected duration should in days if it is long or hour if it is short. 
 Give the answer in json format with "response":"Success", "content": collect of tasks in json with keys "title" and "estimatedDuration". 
 "estimatedDuration" should contain unit, for example, "1day" or "4hours". 
-"estimatedDuration" is "0" if you feel it is instant to complete. 
+"estimatedDuration" is "instant" if you feel it is instant to complete. 
 If the task or comment is confusing, give me json with "response":"error".

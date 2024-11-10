@@ -3,14 +3,13 @@ import { RouterView, useRouter } from 'vue-router'
 import { ref } from 'vue'
 
 const activenum = ref(0)
-const pagename = ["todo", "schedule", "habit"]
+const pagename = ['todo', 'schedule', 'habit']
 const router = useRouter()
 
 function nav(to) {
   activenum.value = to
   router.push({ name: pagename[to] })
 }
-
 </script>
 
 <template>

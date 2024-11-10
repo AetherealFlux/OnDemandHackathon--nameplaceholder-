@@ -22,12 +22,6 @@ async function getHabitList() {
 getHabitList().then((val) => {
   habitList.value = val
 })
-// if (val.length > 0) habitList.value = val
-// else
-//   habitList.value = [
-//     { name: 'Read a book', description: 'Read a book everyday', plan: 'Read 10 pages per day' },
-//   ]
-// })
 
 async function addHabit(habit) {
   try {
@@ -52,10 +46,22 @@ function onSubmit() {
     addHabit(newHabit)
   }
 }
-function generatePlan() {}
+async function getPlan(habitName) {
+  try {
+    const response = await fetch(`http://localhost:8000/genHabitPlan?habit=${habitName}`)
+    if (!response.ok) {
+      throw new Error(`Generating plan was not ok, status: ${response.statusText}`)
+    }
+    return await response.json()
+  } catch (error) {
+    console.error('Error occured:', error)
+    return []
+  }
+}
 
-function regeneratePlan() {
-  plan.value = 'ReGenerating...'
+async function onGenerate() {
+  const plan = await getPlan(habitName.value)
+  habitPlan.value = plan.data
 }
 </script>
 
@@ -85,14 +91,14 @@ function regeneratePlan() {
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasBottom"
           aria-controls="offcanvasBottom"
-          @click="generatePlan()"
+          @click="onGenerate()"
         >
           Start
         </button>
       </div>
     </div>
     <div
-      class="offcanvas offcanvas-bottom h-50"
+      class="offcanvas offcanvas-bottom h-75"
       tabindex="-1"
       id="offcanvasBottom"
       aria-labelledby="offcanvasBottomLabel"
@@ -119,12 +125,14 @@ function regeneratePlan() {
           <textarea
             class="form-control"
             id="habitPlan"
-            rows="10"
+            rows="23"
             v-model="habitPlan"
             disabled
           ></textarea>
           <div class="row p-2 justify-content-between">
-            <button type="button" class="btn btn-secondary btn-lg col-3">Regenerate</button>
+            <button type="button" class="btn btn-secondary btn-lg col-3" @click="onGenerate()">
+              Regenerate
+            </button>
             <button type="button" class="btn btn-primary btn-lg col-8" @click="onSubmit()">
               Submit
             </button>

@@ -4,10 +4,9 @@ import TodoItem from '@/components/TodoItem.vue'
 import SubtaskItem from '@/components/SubtaskItem.vue'
 
 const day = ref(10)
-const todo = ref('')
-
-const description = ref('')
-const duration = ref('')
+const todoName = ref('')
+const todoDesc = ref('')
+const todoDur = ref('')
 const subtasks = ref([])
 
 async function getTodoList() {
@@ -23,7 +22,50 @@ async function getTodoList() {
   }
 }
 
-function genSubtask() {}
+async function addTodo(todoObj) {
+  try {
+    const response = await fetch(
+      `http://localhost:8000/addTodo?title=${todoObj.title}${todoObj.description && `&description=${todoObj.description}`}${todoObj.duration && `&estimatedDuration=${todoObj.duration}`}&subtasks=${JSON.stringify(todoObj.subtasks)}`,
+    )
+    if (!response.ok) {
+      throw new Error(`Network response was not ok, status: ${response.status}`)
+    }
+    return await response.json()
+  } catch (error) {
+    console.error('Problem with adding todo:', error)
+    return []
+  }
+}
+async function getSubtask(name) {
+  try {
+    const response = await fetch(`http://localhost:8000/genSubtodos?todo=${name}`)
+    if (!response.ok) {
+      throw new Error(`Generation subtasks was not ok, status: ${response.statusText}`)
+    }
+    return await response.json()
+  } catch (error) {
+    console.error('Problem with gen subtodos', error)
+    return []
+  }
+}
+
+function onAdd() {
+  getSubtask(todoName.value).then((val) => {
+    subtasks.value = JSON.parse(val.data).content
+  })
+}
+
+function onSubmit() {
+  let todoObj = {
+    title: todoName.value,
+    description: todoDesc.value,
+    duration: todoDur.value,
+    subtasks: subtasks.value,
+  }
+  addTodo(todoObj).then(() => {
+    // window.location.reload()
+  })
+}
 
 let todoList = ref([])
 getTodoList().then((val) => {
@@ -63,7 +105,7 @@ getTodoList().then((val) => {
           class="form-control form-control-lg"
           type="text"
           placeholder="What do you want to do?"
-          v-model.lazy="todo"
+          v-model.lazy="todoName"
         />
         <button
           class="btn btn-primary"
@@ -71,7 +113,7 @@ getTodoList().then((val) => {
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasBottom"
           aria-controls="offcanvasBottom"
-          @click="genSubtask()"
+          @click="onAdd()"
         >
           Add
         </button>
@@ -88,19 +130,28 @@ getTodoList().then((val) => {
           class="form-control form-control-lg"
           type="text"
           placeholder="What do you want to do?"
-          v-model.lazy="todo"
+          v-model.lazy="todoName"
         />
       </div>
       <div class="offcanvas-body">
         <div class="mb-3 row">
-          <input class="form-control my-2" type="text" placeholder="Description" />
+          <input
+            class="form-control my-2"
+            type="text"
+            placeholder="Description"
+            v-model="todoDesc"
+          />
           <input class="form-control my-2" type="text" placeholder="Duration" disabled />
           <template v-for="subtask in subtasks">
-            <SubtaskItem :name="subtask.name" :duration="subtask.duration" />
+            <SubtaskItem :name="subtask.title" :duration="subtask.estimatedDuration" />
           </template>
           <div class="row ms-1 mt-2 justify-content-between">
-            <button type="button" class="btn btn-secondary btn-lg col-3">Regenerate</button>
-            <button type="button" class="btn btn-primary btn-lg col-8">Submit</button>
+            <button type="button" class="btn btn-secondary btn-lg col-3" @click="onAdd()">
+              Regenerate
+            </button>
+            <button type="button" class="btn btn-primary btn-lg col-8" @click="onSubmit()">
+              Submit
+            </button>
           </div>
         </div>
       </div>

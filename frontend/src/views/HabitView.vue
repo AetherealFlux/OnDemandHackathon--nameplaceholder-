@@ -37,7 +37,7 @@ async function addHabit(habit) {
 }
 
 function onSubmit() {
-  if (habitName.value.trim() !== '' && habitDescription.value.trim() !== '') {
+  if (habitName.value.trim() !== '') {
     let newHabit = {
       name: habitName.value.trim(),
       description: habitDescription.value.trim(),

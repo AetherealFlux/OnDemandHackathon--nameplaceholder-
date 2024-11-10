@@ -29,7 +29,7 @@ class OnDemand():
     def genHabitPlan(self, habit: str) -> str:
         session_id = self.__create_chat_session()
         url = "https://api.on-demand.io/chat/v1/sessions/%s/query" % session_id
-        query = "Give me a plan to cultivate a habit with bullet points clearly labeled. The habit is %s."%(habit)
+        query = "Give me a plan to cultivate a habit with bullet points clearly labeled. The habit is %s. Make your anser in HTML format. Exclude instant setups."%(habit)
         self.payload["query"] = query
         response = requests.post(url, json=self.payload, headers=self.headers)
         return response.json()["data"]["answer"]

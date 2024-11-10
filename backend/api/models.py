@@ -5,8 +5,8 @@ class Todo(models.Model):
     title = models.CharField(max_length=128, blank=False)
     description = models.TextField(blank=True)
     date = models.DateField(auto_now=True)
-    estimatedDuration = models.IntegerField(null=True)
-    duration = models.IntegerField(null=True)
+    estimatedDuration = models.CharField(max_length=128, blank=True)
+    duration = models.CharField(max_length=128, blank=True)
     completed = models.BooleanField(default=False)
     feedback = models.TextField(null=True)
 

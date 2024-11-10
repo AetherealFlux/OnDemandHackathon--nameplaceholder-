@@ -69,13 +69,15 @@ def genHabitTodo(request: HttpRequest) -> HttpResponse:
         return HttpResponseBadRequest()
 
 def genSchedule(request: HttpRequest) -> HttpResponse:
-    if request.GET.get("comment"):
-        todos = getTodoList()
-        schedule = ai.Gen.genSchedule(data=str({"comment": request.GET["commnet"], "tasks": str(todos)}))
-        models.Schedule.objects.create(content=schedule)
-        return JsonResponse({"data": schedule})
-    else:
-        return HttpResponseBadRequest()
+    habits = models.Habit.objects.values()
+    for habit in habits:
+        habittodos = json.loads(ai.Gen.genHabitTodo(habit=habit["name"], plan=habit["plan"]))
+        for todo in habittodos["content"]:
+            models.Todo.objects.create(title=todo["task"], estimatedDuration=todo["estimatedDuration"])
+    todos = getTodoList()
+    schedule = ai.Gen.genSchedule(data=str({"tasks": str(todos)}))
+    models.Schedule.objects.create(content=schedule)
+    return JsonResponse({"data": schedule})
 
 def genSummary(request: HttpRequest) -> HttpResponse:
     todos = getTodoList()

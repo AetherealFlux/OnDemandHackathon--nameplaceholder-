@@ -3,6 +3,7 @@ from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest, Http
 from django.db.models import Model
 from django import forms
 from api import ai
+import json
 
 def addTodo(request: HttpRequest) -> HttpResponse:
     class Form(forms.ModelForm):
@@ -14,7 +15,9 @@ def addTodo(request: HttpRequest) -> HttpResponse:
         data = form.cleaned_data
         todo = models.Todo.objects.create(**data)
         if (request.GET.get("subtasks")):
-            
+            subtasks = json.load(request.GET["subtasks"])
+            for subtask in subtasks:
+                models.SubTodo.objects.create(todo=todo, title=subtask["title"], estimatedDuration=subtask["estimatedDuration"])
     else:
         return HttpResponseBadRequest()
     return HttpResponse()
@@ -75,4 +78,8 @@ def genSchedule(request: HttpRequest) -> HttpResponse:
         return HttpResponseBadRequest()
 
 def genSummary(request: HttpRequest) -> HttpResponse:
-    ...
+    todos = getTodoList()
+    schedule = models.Schedule.objects.get(pk=1)
+    summary = ai.Gen.genSummary(data=str({"task": todos, "schedule": schedule.content}))
+    models.TodoSummary.objects.create(content=summary)
+    return summary

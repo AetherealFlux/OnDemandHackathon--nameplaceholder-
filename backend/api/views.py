@@ -52,19 +52,19 @@ def getHabits(request: HttpRequest) -> HttpResponse:
 
 def genSubtodos(request: HttpRequest) -> HttpResponse:
     if request.GET.get("todo"):
-        return ai.Gen.genSubtodos(request.GET["todo"])
+        return JsonResponse({"data": ai.Gen.genSubtodos(request.GET["todo"])})
     else:
         return HttpResponseBadRequest()
 
 def genHabitPlan(request: HttpRequest) -> HttpResponse:
     if request.GET.get("habit"):
-        return ai.Gen.genHabitPlan(request.GET["habit"])
+        return JsonResponse({"data": ai.Gen.genHabitPlan(request.GET["habit"])})
     else:
         return HttpResponseBadRequest()
 
 def genHabitTodo(request: HttpRequest) -> HttpResponse:
     if request.GET.get("habit") and request.GET.get("plan"):
-        return ai.Gen.genHabitTodo(request.GET["habit"], request.GET["plan"])
+        return JsonResponse({"data": ai.Gen.genHabitTodo(request.GET["habit"], request.GET["plan"])})
     else:
         return HttpResponseBadRequest()
 
@@ -73,7 +73,7 @@ def genSchedule(request: HttpRequest) -> HttpResponse:
         todos = getTodoList()
         schedule = ai.Gen.genSchedule(data=str({"comment": request.GET["commnet"], "tasks": str(todos)}))
         models.Schedule.objects.create(content=schedule)
-        return schedule
+        return JsonResponse({"data": schedule})
     else:
         return HttpResponseBadRequest()
 
@@ -82,4 +82,4 @@ def genSummary(request: HttpRequest) -> HttpResponse:
     schedule = models.Schedule.objects.get(pk=1)
     summary = ai.Gen.genSummary(data=str({"task": todos, "schedule": schedule.content}))
     models.TodoSummary.objects.create(content=summary)
-    return summary
+    return JsonResponse({"data": summary})

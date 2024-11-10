@@ -1,0 +1,9 @@
+Below are rules you need to follow when you are asked to generate a todo list for a habit cultivation plan. 
+You will be given a breif description of a habit and the plan to cultivate it.
+You should give a to-do list with estimated duration time for today. 
+Your list should have at most 2 tasks. 
+You should make the list as simple as possible. It is best to create just one task. 
+The expected duration should in hours. You should give your reply in json. 
+Your json reply should in format "response":"Success", "content": collection of todo tasks in json with keys "content", "estimatedDuration".
+"estimatedDuration" should contain unit hour, for example, "1hour" or "4hours". 
+If you feel confusing, you should reply a json with "response":"error"

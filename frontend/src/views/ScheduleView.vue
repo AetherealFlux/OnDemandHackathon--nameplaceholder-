@@ -1,6 +1,12 @@
 <script setup lang="js">
+import { ref } from 'vue';
+
+const schedule = ref("")
+
 </script>
 
 <template>
-    <h1> Hello Schedule! </h1>
+    <h4>
+        {{ schedule }}
+    </h4>
 </template>

@@ -26,6 +26,9 @@ class OnDemand():
         response = requests.post(url, json=self.payload, headers=self.headers)
         return response.json()["data"]["answer"][7:-3]
     
+    def genHabitPlan(self, habit: str) -> str:
+        ...
+
     def genHabitTodo(self,habit:str,plan:str) -> str:
         session_id = self.__create_chat_session()
         url = "https://api.on-demand.io/chat/v1/sessions/%s/query" % session_id

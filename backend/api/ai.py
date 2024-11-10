@@ -20,20 +20,38 @@ class OnDemand():
     def genSubtodos(self, todo: str) -> str:
         session_id = self.__create_chat_session()
         url = "https://api.on-demand.io/chat/v1/sessions/%s/query" % session_id
-        query = "Give me a todo list of subtasks of a task. The task is %s. Also give the expected duration for each subtasks. The expected duration should in days if it is long or minute if it is short. Give the answer in json with \"response\":\"Success\", \"content\": collect of tasks in json with keys \"title\" and \"estimatedDuration\" and \"units\" of \"day\" or \"minute\". estimatedDuration is 0 if you feel it is instant to complete. If the task or comment is confusing, give me json with \"response\":\"error\"\""%(todo)
+        query = "Give me a todo list of subtasks of a task. The task is %s."%(todo)
         self.payload["query"] = query
         self.payload["pluginIds"] = ["plugin-1731192572"]
         response = requests.post(url, json=self.payload, headers=self.headers)
         return response.json()["data"]["answer"][7:-3]
     
-    def genHabitTodo() -> str:
-        ...
+    def genHabitTodo(self,habit:str,plan:str) -> str:
+        session_id = self.__create_chat_session()
+        url = "https://api.on-demand.io/chat/v1/sessions/%s/query" % session_id
+        query = "Give me a todo list of habit caltivation plan. The habit is %s and the plan is %s."%(habit,plan)
+        self.payload["query"] = query
+        self.payload["pluginIds"] = ["plugin-1731196272"]
+        response = requests.post(url, json=self.payload, headers=self.headers)
+        return response.json()["data"]["answer"][7:-3]
     
-    def genSchedule() -> str:
-        ...
+    def genSchedule(self,data:str) -> str: #data:json string {"comment":{...},"tasks":[{...},{...}...]}
+        session_id = self.__create_chat_session()
+        url = "https://api.on-demand.io/chat/v1/sessions/%s/query" % session_id
+        query = "Give me a one-day schedule for tasks %s."%(data)
+        self.payload["query"] = query
+        self.payload["pluginIds"] = ["plugin-1731195963"]
+        response = requests.post(url, json=self.payload, headers=self.headers)
+        return response.json()["data"]["answer"][7:-3]
     
-    def genSummary() -> str:
-        ...
+    def genSummary(self,data:str) -> str: #data:json string {"task":{...},"subtasks":[{...},{...}...]}
+        session_id = self.__create_chat_session()
+        url = "https://api.on-demand.io/chat/v1/sessions/%s/query" % session_id
+        query = "Give me a summary of task or habit caltivationg plan. Input data is here %s"%(data)
+        self.payload["query"] = query
+        self.payload["pluginIds"] = ["plugin-1731197745"]
+        response = requests.post(url, json=self.payload, headers=self.headers)
+        return response.json()["data"]["answer"][7:-3]
 
 Gen = OnDemand()
 print(Gen.genSubtodos("Play Football"))

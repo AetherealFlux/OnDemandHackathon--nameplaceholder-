@@ -44,6 +44,7 @@ function onSubmit() {
       plan: habitPlan.value.trim(),
     }
     addHabit(newHabit)
+    window.location.reload();
   }
 }
 async function getPlan(habitName) {

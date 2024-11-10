@@ -8,7 +8,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      component: ScheduleView
+      component: TodoView
     },
     {
       path: '/schedule',

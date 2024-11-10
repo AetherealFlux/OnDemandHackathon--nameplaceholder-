@@ -21,9 +21,9 @@ function nav(to) {
       </div>
       <div class="container-fluid px-0 border-top">
         <nav class="nav nav-pills nav-justified">
-          <a class="nav-link" :class="{ active: activenum == 0 }" @click="nav(0)">Todo</a>
-          <a class="nav-link" :class="{ active: activenum == 1 }" @click="nav(1)">Schedule</a>
-          <a class="nav-link" :class="{ active: activenum == 2 }" @click="nav(2)">Habit</a>
+          <a class="nav-link col-3" :class="{ active: activenum == 0 }" @click="nav(0)">Todo</a>
+          <a class="nav-link col-3" :class="{ active: activenum == 1 }" @click="nav(1)">Schedule</a>
+          <a class="nav-link col-3" :class="{ active: activenum == 2 }" @click="nav(2)">Habit</a>
         </nav>
       </div>
     </div>

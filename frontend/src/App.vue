@@ -18,7 +18,6 @@ function nav(to) {
   router.push({ name: pagename[to] })
 }
 </script>
-
 <template>
   <div class="container-fluid vh-100 justify-content-between p-0">
     <div class="d-flex flex-column h-100 p-0">
@@ -27,9 +26,27 @@ function nav(to) {
       </div>
       <div class="container-fluid px-0 border-top">
         <nav class="nav nav-pills nav-justified">
-          <a class="nav-link col-3" :class="{ active: activenum == 0 }" @click="nav(0)">Todo</a>
-          <a class="nav-link col-3" :class="{ active: activenum == 1 }" @click="nav(1)">Schedule</a>
-          <a class="nav-link col-3" :class="{ active: activenum == 2 }" @click="nav(2)">Habit</a>
+          <a
+            class="nav-link col-3 text-primary fw-semibold"
+            :class="{ active: activenum == 0, 'bg-primary text-white': activenum == 0 }"
+            @click="nav(0)"
+          >
+            Todo
+          </a>
+          <a
+            class="nav-link col-3 text-dark fw-semibold"
+            :class="{ active: activenum == 1, 'bg-secondary text-white': activenum == 1 }"
+            @click="nav(1)"
+          >
+            Schedule
+          </a>
+          <a
+            class="nav-link col-3 text-success fw-semibold"
+            :class="{ active: activenum == 2, 'bg-success text-white': activenum == 2 }"
+            @click="nav(2)"
+          >
+            Habit
+          </a>
         </nav>
       </div>
     </div>

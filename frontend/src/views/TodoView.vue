@@ -72,44 +72,34 @@ getTodoList().then((val) => {
   todoList.value = val
 })
 </script>
-
 <template>
-  <div class="d-flex flex-column h-100">
-    <!-- <div class="row h-10">
-            <div class="col-3">
-                <button type="button" class="btn btn-light" @click="day -= 1">Yesterday</button>
-            </div>
-            <div class="col">
-                <h3 class="text-center mt-2">{{ day }}/11/2024</h3>
-            </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-light" @click="day += 1">Tomorrow</button>
-            </div>
-        </div> -->
+  <div class="d-flex flex-column h-100 bg-light shadow-sm rounded">
     <div class="row flex-grow-1 h-100 overflow-y-auto">
-      <div class="container h-100">
+      <div class="container h-100 py-3">
         <template v-for="todoList in todoList">
           <TodoItem
             v-for="item in todoList"
+            :key="item.id"
             :name="item.title"
             :description="item.description"
             :duration="item.estimatedDuration"
             :subtasks="item.subTodo"
             :id="item.id"
+            class="mb-3"
           />
         </template>
       </div>
     </div>
-    <div class="row">
+    <div class="row bg-white py-2 shadow-sm border-top">
       <div class="input-group mb-3 px-3">
         <input
-          class="form-control form-control-lg"
+          class="form-control form-control-lg border-primary rounded-start"
           type="text"
           placeholder="What do you want to do?"
           v-model.lazy="todoName"
         />
         <button
-          class="btn btn-primary"
+          class="btn btn-primary btn-lg rounded-end"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasBottom"
@@ -121,34 +111,39 @@ getTodoList().then((val) => {
       </div>
     </div>
     <div
-      class="offcanvas offcanvas-bottom h-75"
+      class="offcanvas offcanvas-bottom h-75 border-top shadow-lg"
       tabindex="-1"
       id="offcanvasBottom"
       aria-labelledby="offcanvasBottomLabel"
     >
-      <div class="offcanvas-header px-1">
+      <div class="offcanvas-header px-3 bg-light">
         <input
-          class="form-control form-control-lg"
+          class="form-control form-control-lg border-primary rounded"
           type="text"
           placeholder="What do you want to do?"
           v-model.lazy="todoName"
         />
       </div>
-      <div class="offcanvas-body">
+      <div class="offcanvas-body bg-white">
         <div class="mb-3 row">
           <input
-            class="form-control my-2"
+            class="form-control my-2 border-secondary rounded"
             type="text"
             placeholder="Description"
             v-model="todoDesc"
           />
-          <input class="form-control my-2" type="text" placeholder="Duration" disabled />
+          <input
+            class="form-control my-2 border-secondary rounded"
+            type="text"
+            placeholder="Duration"
+            disabled
+          />
           <template v-for="subtask in subtasks">
-            <SubtaskItem :name="subtask.title" :duration="subtask.estimatedDuration" />
+            <SubtaskItem class="mb-2" :name="subtask.title" :duration="subtask.estimatedDuration" />
           </template>
-          <div class="row ms-1 mt-2 justify-content-between">
+          <div class="row ms-1 mt-3 justify-content-between">
             <button type="button" class="btn btn-secondary btn-lg col-3" @click="onAdd()">
-              Regenerate
+              Regen
             </button>
             <button type="button" class="btn btn-primary btn-lg col-8" @click="onSubmit()">
               Submit

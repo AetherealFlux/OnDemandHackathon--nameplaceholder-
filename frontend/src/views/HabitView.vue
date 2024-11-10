@@ -26,7 +26,7 @@ getHabitList().then((val) => {
 async function addHabit(habit) {
   try {
     const response = await fetch(
-      `http://localhost:8000/addHabit?name=${habit.name}&description=${habit.description}`,
+      `http://localhost:8000/addHabit?name=${habit.name}&plan=${habit.plan}`,
     )
     if (!response.ok) {
       throw new Error(`Adding habit was not ok, status: ${response.statusText}`)

@@ -1,13 +1,20 @@
 <script setup>
 import { RouterView, useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const activenum = ref(0)
 const pagename = ['todo', 'schedule', 'habit']
 const router = useRouter()
-
+onMounted(() => {
+  const stores = localStorage.getItem('activenum')
+  if (stores) activenum.value = stores
+})
+function saveVal() {
+  localStorage.setItem('activenum', activenum.value)
+}
 function nav(to) {
   activenum.value = to
+  saveVal()
   router.push({ name: pagename[to] })
 }
 </script>

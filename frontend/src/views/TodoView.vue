@@ -63,7 +63,7 @@ function onSubmit() {
     subtasks: subtasks.value,
   }
   addTodo(todoObj).then(() => {
-    // window.location.reload()
+    window.location.reload()
   })
 }
 
@@ -94,6 +94,7 @@ getTodoList().then((val) => {
             :name="item.title"
             :description="item.description"
             :duration="item.estimatedDuration"
+            :subtasks="item.subTodo"
             :id="item.id"
           />
         </template>

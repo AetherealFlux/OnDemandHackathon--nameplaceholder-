@@ -4,7 +4,7 @@ from django import forms
 class Todo(models.Model):
     title = models.CharField(max_length=128, blank=False)
     description = models.TextField(blank=True)
-    date = models.DateField()
+    date = models.DateField(auto_now=True)
     estimatedDuration = models.IntegerField(null=True)
     duration = models.IntegerField(null=True)
     completed = models.BooleanField(default=False)
@@ -25,7 +25,7 @@ class Habit(models.Model):
 
 class Schedule(models.Model):
     content = models.TextField(blank=False)
-    date = models.DateField()
+    date = models.DateField(auto_now=True)
     feedback = models.TextField(blank=True)
 
 class TodoSummary(models.Model):

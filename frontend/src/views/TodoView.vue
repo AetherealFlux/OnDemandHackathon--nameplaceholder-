@@ -18,8 +18,8 @@ async function getTodoList() {
 }
 
 let todoList = ref([])
-getTodoList().then((data) => {
-  todoList.value = data
+getTodoList().then((val) => {
+  todoList.value = val
 })
 </script>
 
@@ -38,8 +38,13 @@ getTodoList().then((data) => {
         </div> -->
     <div class="row flex-grow-1 h-100 overflow-y-auto">
       <div class="container h-100">
-        <template v-for="item in todoList">
-          <TodoItem />
+        <template v-for="todoList in todoList">
+          <TodoItem
+            v-for="item in todoList"
+            :name="item.title"
+            :description="item.description"
+            :duration="item.duration"
+          />
         </template>
       </div>
     </div>

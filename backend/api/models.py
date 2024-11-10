@@ -13,7 +13,7 @@ class Todo(models.Model):
 class SubTodo(models.Model):
     todo = models.ForeignKey(to="Todo", on_delete=models.CASCADE)
     title = models.CharField(max_length=128, blank=False)
-    estimatedDuration = models.IntegerField(null=True)
+    estimatedDuration = models.CharField(max_length=128, blank=True)
     duration = models.IntegerField(null=True)
     completed = models.BooleanField(default=False)
 

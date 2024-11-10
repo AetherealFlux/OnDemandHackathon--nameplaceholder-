@@ -93,7 +93,7 @@ getTodoList().then((val) => {
             v-for="item in todoList"
             :name="item.title"
             :description="item.description"
-            :duration="item.duration"
+            :duration="item.estimatedDuration"
             :id="item.id"
           />
         </template>

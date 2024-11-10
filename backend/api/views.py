@@ -10,16 +10,14 @@ def addTodo(request: HttpRequest) -> HttpResponse:
         class Meta:
             model = models.Todo
             fields = "__all__"
-    form = Form(request.GET)
-    if form.is_valid():
-        data = form.cleaned_data
-        todo = models.Todo.objects.create(**data)
-        if (request.GET.get("subtasks")):
-            subtasks = json.load(request.GET["subtasks"])
-            for subtask in subtasks:
-                models.SubTodo.objects.create(todo=todo, title=subtask["title"], estimatedDuration=subtask["estimatedDuration"])
-    else:
-        return HttpResponseBadRequest()
+    form = dict(request.GET)
+    form["title"] = form["title"][0]
+    todo = models.Todo.objects.create(title=form["title"])
+    if (request.GET.get("subtasks")):
+        subtasks = json.loads(form["subtasks"][0])
+        print(subtasks)
+        for subtask in subtasks:
+            models.SubTodo.objects.create(todo=todo, title=subtask["title"], estimatedDuration=subtask["estimatedDuration"])
     return HttpResponse()
 
 def addHabit(request: HttpRequest) -> HttpResponse:

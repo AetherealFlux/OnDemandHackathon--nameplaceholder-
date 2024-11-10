@@ -57,4 +57,3 @@ class OnDemand():
         return response.json()["data"]["answer"][7:-3]
 
 Gen = OnDemand()
-print(Gen.genSubtodos("Play Football"))

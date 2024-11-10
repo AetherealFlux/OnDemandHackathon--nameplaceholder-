@@ -1,21 +1,5 @@
 <script setup lang="js">
-const props = defineProps({ name: String, description: String, duration: Number, id: Number, subtasks: [Object] })
-
-let durationtext = ""
-let duration = props.duration
-
-if (duration < 60) {
-  durationtext = duration + " second"
-}
-else if (duration < 3600) {
-  durationtext = Math.floor(duration / 6) / 10 + " min"
-}
-else if (duration < 216000) {
-  durationtext = Math.floor(duration / 360) / 10 + " hour"
-}
-else {
-  durationtext = "Long time"
-}
+const props = defineProps({ name: String, description: String, duration: String, id: Number, subtasks: [Object] })
 </script>
 
 <template>
@@ -27,7 +11,7 @@ else {
         </span>
       </div>
       <div class="row">{{ description }}</div>
-      <div class="row">{{ durationtext }}</div>
+      <div class="row">{{ duration }}</div>
       <div class="row" v-if="subtasks && subtasks.length != 0">
         <p class="px-0 my-0 d-inline-flex">
           <a data-bs-toggle="collapse" :href="'#collapse' + id" role="button" aria-expanded="false"

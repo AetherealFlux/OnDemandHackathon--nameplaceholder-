@@ -12,7 +12,9 @@ def addTodo(request: HttpRequest) -> HttpResponse:
     form = Form(request.GET)
     if form.is_valid():
         data = form.cleaned_data
-        models.Todo.objects.create(**data)
+        todo = models.Todo.objects.create(**data)
+        if (request.GET.get("subtasks")):
+            
     else:
         return HttpResponseBadRequest()
     return HttpResponse()

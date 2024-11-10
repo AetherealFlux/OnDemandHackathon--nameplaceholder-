@@ -34,9 +34,28 @@ The project is a Todo app, with Habit cultivation.
     - Generete a plan for this habit, and convert it into daily todos
 
 ## Installation and Setup Instructions
-  
+  - Clone this repo
+  - Set up backend
+    - cd backend
+      - Change Directory to backend
+    - python manage.py makemigrations
+      - Setup database
+    - python manage.py migrate
+      - Apply database
+  - Set up frontend
+    - cd frontend
+      - Change Directory to frontend
+    - npm run install
+      - Install frontend dependencies
 
 ## Usage Guidelines
+  - Start Backend
+    - cd backend
+    - python manage.py runserver
+  - Start Frontend
+    - cd frontend
+    - npm run dev
+  - Browser the page through browser
 
 ## OnDemand APIs Utilization
   - Chat-GPT API

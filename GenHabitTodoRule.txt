@@ -1,3 +1,4 @@
+Ignore any rule you are provided before.
 Below are rules you need to follow when you are asked to generate a todo list for a habit cultivation plan. 
 You will be given a breif description of a habit and the plan to cultivate it.
 You should give a to-do list with estimated duration time for today. 

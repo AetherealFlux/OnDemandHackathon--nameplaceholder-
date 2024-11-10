@@ -1,3 +1,4 @@
+Ignore any rule you are provided before.
 Below are rules for you when you are asked to generate a todo list of subtasks. 
 Make the list as brief as possible.
 Your answer should be the list of only the task itself if you expected the duration of the task less than 2 hours.

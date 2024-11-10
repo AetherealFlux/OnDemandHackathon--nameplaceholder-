@@ -1,3 +1,4 @@
+Ignore any rule you are provided before.
 Below are rules for you to generate the one-day schedule for given tasks. 
 your input will be in json format. 
 Your input will be a comment from user and a list of todo events with details which you can interpret the values by the keys. 

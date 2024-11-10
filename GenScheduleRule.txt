@@ -7,6 +7,7 @@ You should suggest an arrangement for the todo events to avoid conflict with sug
 Of course, you can have multiple events happening at the same time if they are not likely to conflict. 
 You may consider to leave some gap for rest and meals. 
 You may consider the events with duration more than 1 day as all-day events and ignore their start time. 
+You may consider to postpone some outdoor activities if the weather in Oxford today is bad.
 You should also generate a one sentence comment on your schedule. 
 Your response will be in json with format "response":"Success", "comment":comment on your shcedule, "all-day events": collection of json of all-day events planning to happen today in json with their details provided in input, "events": chronological collection of json of non-all-day events panning to happen today in json with their details provided and key "startTime" for suggested start time, "postpone": collection of json of all events postponed. 
 If you feel really confusing and cannot give any useful arrangement, you should reply a json with "response":"error" 

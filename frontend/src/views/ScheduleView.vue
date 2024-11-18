@@ -21,10 +21,15 @@ const comment = ref('Generating...')
 getSchedule().then((val) => {
   try {
     val = JSON.parse(val.data)
-    console.log(val)
-    comment.value = val.comment
-    events.value = val.events
-    postpones.value = val.postpone
+    if(val.response == "error") {
+        comment.value = "We are unable to generate a schedule... :("
+    }
+    else {
+        console.log(val)
+        comment.value = val.comment
+        events.value = val.events
+        postpones.value = val.postpone
+    }
   } catch (error) {
     comment.value = val.data
   }
